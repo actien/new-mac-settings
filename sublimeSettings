@@ -1,0 +1,17 @@
+{
+	"auto_wrap_width": 90,
+	"draw_white_space": "all",
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"rulers":
+	[
+		80,
+		90,
+		100
+	],
+	"show_full_path": true
+}
+

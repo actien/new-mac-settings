@@ -1,0 +1,61 @@
+[alias]
+st = status
+sto = "!git log --name-status origin/master..$(git rev-parse --abbrev-ref HEAD)"
+ci = commit
+br = branch -v
+co = checkout
+df = diff
+ds = diff --staged
+dc = !sh -c 'git diff $1^..$1' -
+dtc = !sh -c 'git difftool $1^..$1' -
+lg = log -p
+lgo = log --name-status
+lol = log --graph --decorate --pretty=oneline --abbrev-commit
+lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
+ls = ls-files
+unstage = reset HEAD
+out = "!git log origin/master..$(git rev-parse --abbrev-ref HEAD)"
+in = "!git fetch && git log HEAD..origin/master"
+merge = merge --ff-only
+pull = pull --ff-only
+forget = rm --cached
+pr = pull --rebase
+cpr = "!git checkout master && git pr"
+
+# Show files ignored by git:
+ign = ls-files -o -i --exclude-standard
+dsf = "!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" && git diff --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+pr = pull --rebase
+amend = commit -a --amend -C HEAD
+
+[color]
+branch = auto
+diff = auto
+interactive = auto
+status = auto
+
+[push]
+default = simple
+
+[pull]
+ff = only
+
+[diff]
+tool = Kaleidoscope
+
+[merge]
+tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+trustexitcode = true
+[difftool "Kaleidoscope"]
+cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+prompt = false
+[mergetool]
+prompt = false
+[color "diff-highlight"]
+oldNormal = red bold
+oldHighlight = red bold 52
+newNormal = green bold
+newHighlight = green bold 22
